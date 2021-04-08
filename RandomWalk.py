@@ -355,7 +355,17 @@ class Portals(Map):
         position.append(jump)
         self.drunks[drunk][1].append(position)
 
-#%% Test
+def input_int(prompt):
+    incorrect = True
+    while incorrect:
+        choice = input(prompt)
+        incorrect = False
+        try:
+            int(choice)
+        except:
+            print('Must be an integer')
+            incorrect = True
+    return(choice)
 
 if __name__ == '__main__':
    
@@ -384,10 +394,22 @@ if __name__ == '__main__':
     maps = ['Plane', 'Torus', 'Portals']
    
     if field == 1:
-        map_size = input('What is the maps size? ') #Fazer
-        field = Torus(map_size)
+        horizontal = input_int('What is the map width? ')
+        height = input_int('What is the map height? ')
+        field = Torus([vertical, horizontal])
     elif field == 2:
-        portals = input('Location of the portals: ') #Fazer
+        i = 1
+        entrances = []
+        exits = []
+        again = True
+        while again:
+            x1 = input_int('Type the x coordinate of the entrance to portal {}. '.format(i))
+            y1 = input_int('Type the y coordinate of the entrance toportal {}. '.format(i))
+            x2 = input_int('Type the x coordinate of the exit to portal {}. '.format(i))
+            y2 = input_int('Type the y coordinate of the exit to portal {}. '.format(i))
+            entrances.append([x1, y1])
+            exits.append([x2, y2])
+            again = input_int('Do you want do add another portal? (0-No, 1-Yes ')
         field = Portals(portals)
     else:
         field = Plane()
